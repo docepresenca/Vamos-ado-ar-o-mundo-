@@ -1,248 +1,607 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Doce Presença</title>
 
 <style>
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
+
 body{
-  margin:0;
-  font-family: Arial, sans-serif;
-  color:#3b2a1a;
-  height:100vh;
-  overflow:hidden;
 
-  /* 🍯 fundo envolvente */
-  background: radial-gradient(circle at top, #fff3db, #f2d0a4, #e6b07a);
+font-family:Arial,sans-serif;
+
+background:
+linear-gradient(
+180deg,
+#4b2c20,
+#6f422a,
+#9f6b46
+);
+
+min-height:100vh;
+
+padding:20px;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+color:white;
+
 }
 
-/* tela cheia */
 .container{
-  height:100vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-  align-items:center;
-  text-align:center;
-  padding:30px 20px;
-  box-sizing:border-box;
+
+width:100%;
+
+max-width:430px;
+
+background:
+rgba(255,255,255,.10);
+
+backdrop-filter:blur(12px);
+
+padding:25px;
+
+border-radius:28px;
+
+box-shadow:
+0 10px 35px rgba(0,0,0,.35);
+
+text-align:center;
+
 }
 
-/* ✨ FRASE ALEATÓRIA TOPO */
-.frase-topo{
-  font-style:italic;
-  font-size:18px;
-  max-width:90%;
-  opacity:0.9;
-  transition:1s;
+h1{
+
+font-size:34px;
+
+margin-bottom:12px;
+
 }
 
-/* título */
-.titulo{
-  font-family: "Brush Script MT", cursive;
-  font-size:44px;
-  margin:10px 0;
+.sub{
+
+line-height:1.6;
+
+opacity:.9;
+
+margin-bottom:25px;
+
+font-style:italic;
+
 }
 
-/* botões estilo presença */
+.card{
+
+background:white;
+
+color:#5c3a2d;
+
+padding:25px;
+
+border-radius:22px;
+
+min-height:180px;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+font-size:20px;
+
+line-height:1.6;
+
+margin-bottom:20px;
+
+}
+
 .btn{
-  display:inline-block;
-  padding:14px 26px;
-  border-radius:40px;
-  color:white;
-  text-decoration:none;
-  font-weight:bold;
-  margin:8px;
-  box-shadow:0 8px 20px rgba(0,0,0,0.2);
-  transition:0.3s;
-  cursor:pointer;
-  border:none;
-  font-size:15px;
+
+width:100%;
+
+padding:15px;
+
+margin-top:12px;
+
+border:none;
+
+border-radius:16px;
+
+font-size:17px;
+
+font-weight:bold;
+
+cursor:pointer;
+
 }
 
-.btn:hover{
-  transform:scale(1.05);
+.principal{
+
+background:#ffca7a;
+
 }
 
-.insta{
-  background:linear-gradient(45deg,#8b4513,#d2691e);
+.sec{
+
+background:#ffffff;
+
+color:#6f422a;
+
 }
 
-.acao{
-  background:linear-gradient(45deg,#b87333,#e0a96d);
+.instagram{
+
+background:#8d5837;
+
+color:white;
+
+text-decoration:none;
+
+display:block;
+
 }
 
-.texto-btn{
-  display:inline-block;
-  margin:8px;
-  padding:12px 18px;
-  border-radius:30px;
-  background:rgba(255,255,255,0.35);
-  backdrop-filter: blur(6px);
-  cursor:pointer;
-  transition:0.3s;
-}
-
-.texto-btn:hover{
-  transform:scale(1.05);
-}
-
-/* modal */
 .modal{
-  display:none;
-  position:fixed;
-  top:0; left:0;
-  width:100%; height:100%;
-  background:rgba(0,0,0,0.5);
-  justify-content:center;
-  align-items:center;
+
+display:none;
+
+position:fixed;
+
+inset:0;
+
+background:rgba(0,0,0,.65);
+
+justify-content:center;
+
+align-items:center;
+
+padding:20px;
+
 }
 
-.modal-content{
-  background:#fff7ec;
-  padding:25px;
-  border-radius:20px;
-  width:85%;
-  max-width:350px;
-  text-align:center;
+.box{
+
+background:white;
+
+width:100%;
+
+max-width:360px;
+
+padding:25px;
+
+border-radius:20px;
+
+color:#5c3a2d;
+
 }
 
-input, textarea{
-  width:90%;
-  padding:10px;
-  margin:8px 0;
-  border-radius:10px;
-  border:1px solid #ccc;
+input,
+textarea{
+
+width:100%;
+
+padding:12px;
+
+margin-top:10px;
+
+border-radius:12px;
+
+border:1px solid #ddd;
+
+}
+
+textarea{
+
+height:120px;
+
+resize:none;
+
+}
+
+.contador{
+
+margin-top:20px;
+
+opacity:.8;
+
 }
 
 .footer{
-  font-size:12px;
-  opacity:0.7;
+
+margin-top:20px;
+
+font-size:12px;
+
+opacity:.7;
+
 }
+
 </style>
+
 </head>
 
 <body>
 
 <div class="container">
 
-  <!-- ✨ FRASE ALEATÓRIA -->
-  <div class="frase-topo" id="fraseTopo">
-    Você está prestes a adoçar o dia de alguém 🍯
-  </div>
+<h1>
 
-  <!-- 🍯 TÍTULO -->
-  <div>
-    <h1 class="titulo">Nos ajude a adoçar o mundo</h1>
+🍫 Nos ajude a adoçar o mundo
 
-    <p style="font-style:italic;">
-      "Quando a Doce Presença chega o amargo do mundo vai embora"
-    </p>
-  </div>
+</h1>
 
-  <!-- 🍯 AÇÕES -->
-  <div>
+<div class="sub">
 
-    <a class="texto-btn"
-    href="https://wa.me/?text=🍯%20Hoje%20decidi%20adoçar%20meu%20dia.%0A%0Ahttps://docepresenca.github.io/Vamos-ado-ar-o-mundo-/"
-    target="_blank">
-      🍯 Adoce seu dia
-    </a>
-
-    <div class="texto-btn" onclick="abrirModal()">
-      🤎 Adoce o dia de alguém
-    </div>
-
-  </div>
-
-  <!-- 📸 INSTAGRAM PRINCIPAL -->
-  <a class="btn insta"
-  href="https://www.instagram.com/doce.presenca.doces?igsh=MWVvcW44bmZ6bXZpdQ=="
-  target="_blank">
-    ✨ Conhecer nosso Instagram
-  </a>
-
-  <div class="footer">
-    Doce Presença • pequenos encontros, grandes significados
-  </div>
+"Quando a Doce Presença chega o amargo do mundo vai embora"
 
 </div>
 
-<!-- 🧁 MODAL -->
-<div class="modal" id="modal">
-  <div class="modal-content">
+<div
+class="card"
+id="mensagem">
 
-    <h3>🤎 Enviar presença</h3>
+Carregando presença...
 
-    <input type="text" id="nome" placeholder="Nome (opcional)">
-    <input type="text" id="cidade" placeholder="Cidade (opcional)">
-    <textarea id="msg" rows="4" placeholder="Escreva sua mensagem..."></textarea>
-
-    <button class="btn acao" onclick="gerar()">
-      📲 gerar envio
-    </button>
-
-    <br><br>
-
-    <button onclick="fecharModal()" style="background:none;border:none;">
-      fechar ✖
-    </button>
-
-  </div>
 </div>
 
-<script>
+<button
+class="btn principal"
+onclick="receberMensagem()">
 
-/* 🍯 FRASES ALEATÓRIAS */
-const frases = [
-  "Hoje pode ser o dia em que alguém sorri por sua causa.",
-  "Pequenos gestos carregam grandes presenças.",
-  "Você está espalhando algo que não se vê, mas se sente.",
-  "Doce também é forma de cuidado.",
-  "O simples pode tocar o eterno.",
-  "Alguém vai lembrar de você com esse gesto.",
-  "Presença também se compartilha."
+🍯 Adoce seu dia
+
+</button>
+
+<button
+class="btn sec"
+onclick="abrirModal()">
+
+🤎 Adoce o dia de alguém
+
+</button>
+
+<a
+class="btn instagram"
+href="https://www.instagram.com/doce.presenca.doces?igsh=MWVvcW44bmZ6bXZpdQ=="
+target="_blank">
+
+✨ Conhecer nosso Instagram
+
+</a>
+
+<div class="contador">
+
+<span id="total">
+
+0
+
+</span>
+
+presenças espalhadas ✨
+
+</div>
+
+<div class="footer">
+
+Doce Presença • pequenos encontros, grandes significados
+
+</div>
+
+</div>
+
+
+<!-- MODAL -->
+
+<div
+class="modal"
+id="modal">
+
+<div class="box">
+
+<h3>
+
+Compartilhar presença 🤎
+
+</h3>
+
+<input
+id="nome"
+placeholder="Nome (opcional)">
+
+<input
+id="cidade"
+placeholder="Cidade (opcional)">
+
+<textarea
+id="texto"
+placeholder="Escreva sua presença...">
+
+</textarea>
+
+<button
+class="btn principal"
+onclick="salvarMensagem()">
+
+Compartilhar no site
+
+</button>
+
+<button
+class="btn sec"
+onclick="compartilharWhats()">
+
+Compartilhar WhatsApp
+
+</button>
+
+</div>
+
+</div>
+
+
+<script type="module">
+
+import {
+initializeApp
+}
+from
+"https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
+
+import {
+
+getDatabase,
+ref,
+push,
+get
+
+}
+from
+"https://www.gstatic.com/firebasejs/10.13.1/firebase-database.js";
+
+
+const firebaseConfig = {
+
+apiKey:"AIzaSyAd1V6qcGeRmzRjNht8TScYJ5n1Z57Zjws",
+
+authDomain:
+"mundo-mais-doce.firebaseapp.com",
+
+databaseURL:
+"https://mundo-mais-doce-default-rtdb.firebaseio.com/",
+
+projectId:
+"mundo-mais-doce",
+
+storageBucket:
+"mundo-mais-doce.firebasestorage.app",
+
+messagingSenderId:
+"987943880698",
+
+appId:
+"1:987943880698:web:a2fe43a2567de892a00643",
+
+measurementId:
+"G-YTBG03LS0W"
+
+};
+
+
+const app =
+initializeApp(firebaseConfig);
+
+const db =
+getDatabase(app);
+
+const modal =
+document.getElementById("modal");
+
+
+window.abrirModal=()=>{
+
+modal.style.display="flex";
+
+};
+
+modal.onclick=(e)=>{
+
+if(e.target===modal){
+
+modal.style.display="none";
+
+}
+
+};
+
+
+window.receberMensagem=
+async()=>{
+
+const snap=
+await get(
+ref(
+db,
+"presencas"
+)
+);
+
+if(!snap.exists()){
+
+mensagem.innerHTML=
+"Seja a primeira presença 🍫";
+
+return;
+
+}
+
+const lista=
+
+Object.values(
+snap.val()
+);
+
+const sorteio=
+
+lista[
+Math.floor(
+Math.random()
+*
+lista.length
+)
 ];
 
-function trocarFrase(){
-  const el = document.getElementById("fraseTopo");
-  const nova = frases[Math.floor(Math.random() * frases.length)];
-  el.innerText = nova;
+mensagem.innerHTML=
+
+`"${sorteio.texto}"
+
+<br><br>
+
+✨ ${sorteio.nome || "Alguém"}`;
+
+};
+
+
+window.salvarMensagem=
+async()=>{
+
+const nome=
+nome.value.trim();
+
+const cidade=
+cidade.value.trim();
+
+const texto=
+document
+.getElementById("texto")
+.value.trim();
+
+if(!texto){
+
+alert(
+"Escreva algo 🍫"
+);
+
+return;
+
 }
 
-setInterval(trocarFrase, 4000);
+await push(
 
-/* modal */
-function abrirModal(){
-  document.getElementById("modal").style.display="flex";
+ref(
+db,
+"presencas"
+),
+
+{
+
+nome,
+cidade,
+texto,
+data:Date.now()
+
 }
 
-function fecharModal(){
-  document.getElementById("modal").style.display="none";
+);
+
+document
+.getElementById("nome")
+.value="";
+
+document
+.getElementById("cidade")
+.value="";
+
+document
+.getElementById("texto")
+.value="";
+
+modal.style.display=
+"none";
+
+receberMensagem();
+
+carregarTotal();
+
+};
+
+
+window.compartilharWhats=
+()=>{
+
+const texto=
+
+document
+.getElementById("texto")
+.value;
+
+window.open(
+
+"https://wa.me/?text="+
+
+encodeURIComponent(
+
+texto +
+
+"\n\n🍫 Doce Presença"
+
+),
+
+"_blank"
+
+);
+
+};
+
+
+async function carregarTotal(){
+
+const snap=
+
+await get(
+ref(
+db,
+"presencas"
+)
+);
+
+if(!snap.exists()){
+
+total.innerText=0;
+
+return;
+
 }
 
-function gerar(){
-  let nome = document.getElementById("nome").value;
-  let cidade = document.getElementById("cidade").value;
-  let msg = document.getElementById("msg").value;
+total.innerText=
 
-  let texto =
-`🤎 Você recebeu uma presença
+Object.keys(
+snap.val()
+).length;
 
-${nome ? "De: " + nome : ""}
-${cidade ? "Cidade: " + cidade : ""}
-
-"${msg}"
-
-🍯 Doce Presença`;
-
-  let link = "https://wa.me/?text=" + encodeURIComponent(texto);
-
-  window.open(link, "_blank");
 }
+
+
+receberMensagem();
+
+carregarTotal();
 
 </script>
 
 </body>
+
 </html>
