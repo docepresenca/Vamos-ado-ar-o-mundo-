@@ -23,26 +23,22 @@ rel="stylesheet">
 <style>
 
 *{
-
 margin:0;
 padding:0;
 box-sizing:border-box;
-
 }
 
 body{
 
-font-family:
-'Montserrat',
-sans-serif;
+font-family:'Montserrat',sans-serif;
 
 min-height:100vh;
 
-background-image:
+background:
 
 linear-gradient(
 rgba(20,10,5,.45),
-rgba(20,10,5,.55)
+rgba(20,10,5,.60)
 ),
 
 url("imagem.png");
@@ -57,9 +53,7 @@ justify-content:center;
 
 align-items:center;
 
-padding:15px;
-
-overflow:hidden;
+padding:12px;
 
 }
 
@@ -69,37 +63,22 @@ width:100%;
 
 max-width:390px;
 
-max-height:95vh;
+max-height:96vh;
 
 overflow-y:auto;
 
-padding:24px;
+padding:22px;
 
 border-radius:28px;
 
 background:
-
 rgba(255,255,255,.10);
 
 backdrop-filter:blur(12px);
 
-box-shadow:
-
-0 10px 35px rgba(0,0,0,.35);
-
-text-align:center;
-
 color:white;
 
-}
-
-.logo{
-
-font-size:15px;
-
-letter-spacing:4px;
-
-opacity:.8;
+text-align:center;
 
 }
 
@@ -109,7 +88,7 @@ font-family:
 'Cormorant Garamond',
 serif;
 
-font-size:48px;
+font-size:46px;
 
 line-height:1;
 
@@ -119,27 +98,26 @@ margin:10px 0;
 
 .sub{
 
+font-size:14px;
+
 line-height:1.6;
 
 margin-bottom:20px;
-
-font-size:14px;
 
 }
 
 .card{
 
-position:relative;
-
 background:
-
 rgba(255,255,255,.95);
 
-border-radius:25px;
+color:#5b3926;
 
 padding:24px;
 
-min-height:220px;
+border-radius:24px;
+
+min-height:230px;
 
 display:flex;
 
@@ -149,9 +127,7 @@ justify-content:center;
 
 align-items:center;
 
-color:#5a3625;
-
-margin-bottom:18px;
+cursor:pointer;
 
 }
 
@@ -167,9 +143,19 @@ line-height:1.4;
 
 }
 
-.likes{
+#autor{
 
 margin-top:18px;
+
+font-size:14px;
+
+opacity:.8;
+
+}
+
+.likes{
+
+margin-top:15px;
 
 font-size:14px;
 
@@ -183,7 +169,7 @@ gap:10px;
 
 width:100%;
 
-margin-top:15px;
+margin-top:16px;
 
 }
 
@@ -194,11 +180,11 @@ width:100%;
 
 padding:15px;
 
+margin-top:12px;
+
 border:none;
 
 border-radius:16px;
-
-margin-top:12px;
 
 font-weight:600;
 
@@ -208,7 +194,7 @@ cursor:pointer;
 
 .principal{
 
-background:#e6b46d;
+background:#e7b56f;
 
 }
 
@@ -216,7 +202,7 @@ background:#e6b46d;
 
 background:white;
 
-color:#5a3625;
+color:#5b3926;
 
 }
 
@@ -224,25 +210,13 @@ color:#5a3625;
 
 display:block;
 
-text-decoration:none;
-
 background:#7a4c31;
+
+text-decoration:none;
 
 color:white;
 
 }
-
-.contador{
-
-margin-top:18px;
-
-font-size:14px;
-
-opacity:.8;
-
-}
-
-/* modal */
 
 .modal{
 
@@ -252,7 +226,7 @@ position:fixed;
 
 inset:0;
 
-background:rgba(0,0,0,.70);
+background:rgba(0,0,0,.75);
 
 justify-content:center;
 
@@ -274,9 +248,9 @@ background:#fff8f2;
 
 padding:24px;
 
-border-radius:22px;
+border-radius:24px;
 
-color:#5a3625;
+color:#5b3926;
 
 }
 
@@ -303,11 +277,23 @@ resize:none;
 
 }
 
-.previewImg{
+.imagemModal{
 
-width:100%;
+width:90%;
 
-border-radius:20px;
+max-width:360px;
+
+border-radius:24px;
+
+}
+
+.contador{
+
+margin-top:20px;
+
+font-size:14px;
+
+opacity:.8;
 
 }
 
@@ -318,12 +304,6 @@ border-radius:20px;
 <body>
 
 <div class="container">
-
-<div class="logo">
-
-DOCE PRESENÇA
-
-</div>
 
 <h1>
 
@@ -339,13 +319,15 @@ Quando a Doce Presença chega o amargo do mundo vai embora ✨
 
 <div
 class="card"
-onclick="abrirArte()">
+id="cardMensagem">
 
 <div id="mensagem">
 
-Carregando presença...
+Carregando...
 
 </div>
+
+<div id="autor"></div>
 
 <div
 class="likes"
@@ -359,7 +341,7 @@ id="likes">
 
 <button
 class="principal"
-onclick="event.stopPropagation();curtirMensagem();">
+onclick="event.stopPropagation();curtirMensagem()">
 
 ❤️ Curtir
 
@@ -367,9 +349,9 @@ onclick="event.stopPropagation();curtirMensagem();">
 
 <button
 class="sec"
-onclick="event.stopPropagation();gerarImagem();">
+onclick="event.stopPropagation();receberMensagem()">
 
-🖼️ Virar imagem
+🍯 Outra
 
 </button>
 
@@ -379,14 +361,6 @@ onclick="event.stopPropagation();gerarImagem();">
 
 <button
 class="principal"
-onclick="receberMensagem()">
-
-🍯 Adoce seu dia
-
-</button>
-
-<button
-class="sec"
 onclick="abrirModal()">
 
 🤎 Adoce o dia de alguém
@@ -395,10 +369,10 @@ onclick="abrirModal()">
 
 <a
 class="btn instagram"
-target="_blank"
-href="https://www.instagram.com/doce.presenca.doces?igsh=MWVvcW44bmZ6bXZpdQ==">
+href="https://www.instagram.com/doce.presenca.doces?igsh=MWVvcW44bmZ6bXZpdQ=="
+target="_blank">
 
-✨ Conhecer nosso Instagram
+✨ Conhecer Instagram
 
 </a>
 
@@ -416,7 +390,6 @@ presenças espalhadas ✨
 
 </div>
 
-<!-- modal compartilhar -->
 
 <div
 class="modal"
@@ -434,23 +407,13 @@ placeholder="Cidade opcional">
 
 <textarea
 id="texto"
-placeholder="Escreva sua presença">
-
-</textarea>
+placeholder="Escreva sua presença"></textarea>
 
 <button
 class="principal"
 onclick="salvarMensagem()">
 
-Compartilhar no site
-
-</button>
-
-<button
-class="sec"
-onclick="compartilharWhats()">
-
-WhatsApp
+Compartilhar
 
 </button>
 
@@ -458,7 +421,6 @@ WhatsApp
 
 </div>
 
-<!-- modal imagem msg -->
 
 <div
 class="modal"
@@ -466,36 +428,7 @@ id="arteModal">
 
 <img
 src="imagem.msg.png"
-
-style="
-width:90%;
-max-width:360px;
-border-radius:25px;
-">
-
-</div>
-
-<!-- modal preview -->
-
-<div
-class="modal"
-id="previewModal">
-
-<div class="box">
-
-<img
-class="previewImg"
-id="previewImg">
-
-<button
-class="principal"
-onclick="baixarImagem()">
-
-Salvar imagem
-
-</button>
-
-</div>
+class="imagemModal">
 
 </div>
 
@@ -519,6 +452,7 @@ update
 from
 "https://www.gstatic.com/firebasejs/10.13.1/firebase-database.js";
 
+
 const firebaseConfig={
 
 apiKey:"AIzaSyAd1V6qcGeRmzRjNht8TScYJ5n1Z57Zjws",
@@ -531,15 +465,53 @@ appId:"1:987943880698:web:a2fe43a2567de892a00643"
 
 };
 
-const app=initializeApp(firebaseConfig);
+const app=
+initializeApp(firebaseConfig);
 
-const db=getDatabase(app);
+const db=
+getDatabase(app);
 
-let atualId=null;
 let atual={};
-let imgGerada="";
+let atualId=null;
 
-window.receberMensagem=async()=>{
+const modal=
+document.getElementById("modal");
+
+const arteModal=
+document.getElementById("arteModal");
+
+document
+.getElementById("cardMensagem")
+.onclick=()=>{
+
+arteModal.style.display="flex";
+
+};
+
+arteModal.onclick=()=>{
+
+arteModal.style.display="none";
+
+};
+
+window.abrirModal=()=>{
+
+modal.style.display="flex";
+
+};
+
+modal.onclick=(e)=>{
+
+if(e.target===modal){
+
+modal.style.display="none";
+
+}
+
+};
+
+window.receberMensagem=
+async()=>{
 
 const snap=
 await get(
@@ -555,27 +527,40 @@ return;
 
 }
 
-const obj=snap.val();
+const dados=
+snap.val();
 
 const keys=
-Object.keys(obj);
+Object.keys(dados);
 
 const key=
 keys[
 Math.floor(
-Math.random()*keys.length
+Math.random()
+*
+keys.length
 )
 ];
 
 atualId=key;
 
-atual=obj[key];
+atual=dados[key];
 
-mensagem.innerHTML=
+document
+.getElementById("mensagem")
+.innerHTML=
 
 `"${atual.texto}"`;
 
-likes.innerText=
+document
+.getElementById("autor")
+.innerHTML=
+
+`✨ ${atual.nome || "Alguém"} ${atual.cidade ? "- "+atual.cidade : ""}`;
+
+document
+.getElementById("likes")
+.innerHTML=
 
 `❤️ ${atual.likes || 0} curtidas`;
 
@@ -593,7 +578,13 @@ document.getElementById("cidade").value.trim();
 const texto=
 document.getElementById("texto").value.trim();
 
-if(!texto) return;
+if(!texto){
+
+alert("Escreva algo 🍫");
+
+return;
+
+}
 
 await push(
 
@@ -611,6 +602,10 @@ data:Date.now()
 
 );
 
+document.getElementById("nome").value="";
+document.getElementById("cidade").value="";
+document.getElementById("texto").value="";
+
 modal.style.display="none";
 
 receberMensagem();
@@ -624,7 +619,8 @@ async()=>{
 
 if(!atualId) return;
 
-const qtd=(atual.likes||0)+1;
+const qtd=
+(atual.likes||0)+1;
 
 await update(
 
@@ -633,61 +629,32 @@ db,
 "presencas/"+atualId
 ),
 
-{likes:qtd}
+{
+likes:qtd
+}
 
 );
 
 atual.likes=qtd;
 
-likes.innerText=
+document
+.getElementById("likes")
+.innerHTML=
 
 `❤️ ${qtd} curtidas`;
-
-};
-
-window.compartilharWhats=
-()=>{
-
-window.open(
-
-"https://wa.me/?text="+
-
-encodeURIComponent(
-
-texto.value+
-
-"\n🍫 Doce Presença"
-
-)
-
-);
-
-};
-
-window.abrirModal=
-()=>modal.style.display="flex";
-
-window.abrirArte=
-()=>arteModal.style.display="flex";
-
-arteModal.onclick=
-()=>arteModal.style.display="none";
-
-modal.onclick=
-(e)=>{
-
-if(e.target===modal)
-
-modal.style.display="none";
 
 };
 
 async function carregarTotal(){
 
 const snap=
-await get(ref(db,"presencas"));
+await get(
+ref(db,"presencas")
+);
 
-total.innerText=
+document
+.getElementById("total")
+.innerText=
 
 snap.exists()
 
