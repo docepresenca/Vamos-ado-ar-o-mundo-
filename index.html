@@ -1,24 +1,14 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width,initial-scale=1">
-
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Doce Presença</title>
 
-<link rel="preconnect"
-href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link rel="preconnect"
-href="https://fonts.gstatic.com"
-crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;700&family=Montserrat:wght@300;400;600&display=swap"
-rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
 
@@ -32,20 +22,17 @@ body{
 
 font-family:'Montserrat',sans-serif;
 
-min-height:100vh;
-
 background:
-
 linear-gradient(
-rgba(20,10,5,.45),
-rgba(20,10,5,.60)
+rgba(20,10,5,.55),
+rgba(20,10,5,.65)
 ),
-
 url("imagem.png");
 
 background-size:cover;
-
 background-position:center;
+
+min-height:100vh;
 
 display:flex;
 
@@ -62,10 +49,6 @@ padding:12px;
 width:100%;
 
 max-width:390px;
-
-max-height:96vh;
-
-overflow-y:auto;
 
 padding:22px;
 
@@ -88,11 +71,9 @@ font-family:
 'Cormorant Garamond',
 serif;
 
-font-size:46px;
+font-size:44px;
 
-line-height:1;
-
-margin:10px 0;
+margin-bottom:12px;
 
 }
 
@@ -108,26 +89,13 @@ margin-bottom:20px;
 
 .card{
 
-background:
-rgba(255,255,255,.95);
+background:white;
 
 color:#5b3926;
 
-padding:24px;
+padding:25px;
 
 border-radius:24px;
-
-min-height:230px;
-
-display:flex;
-
-flex-direction:column;
-
-justify-content:center;
-
-align-items:center;
-
-cursor:pointer;
 
 }
 
@@ -145,7 +113,7 @@ line-height:1.4;
 
 #autor{
 
-margin-top:18px;
+margin-top:14px;
 
 font-size:14px;
 
@@ -167,9 +135,7 @@ display:flex;
 
 gap:10px;
 
-width:100%;
-
-margin-top:16px;
+margin-top:18px;
 
 }
 
@@ -178,9 +144,7 @@ button,
 
 width:100%;
 
-padding:15px;
-
-margin-top:12px;
+padding:14px;
 
 border:none;
 
@@ -188,21 +152,21 @@ border-radius:16px;
 
 font-weight:600;
 
+margin-top:12px;
+
 cursor:pointer;
 
 }
 
 .principal{
 
-background:#e7b56f;
+background:#e6b46d;
 
 }
 
 .sec{
 
-background:white;
-
-color:#5b3926;
+background:#f3f3f3;
 
 }
 
@@ -212,9 +176,9 @@ display:block;
 
 background:#7a4c31;
 
-text-decoration:none;
-
 color:white;
+
+text-decoration:none;
 
 }
 
@@ -277,9 +241,9 @@ resize:none;
 
 }
 
-.imagemModal{
+.preview{
 
-width:90%;
+width:92%;
 
 max-width:360px;
 
@@ -287,18 +251,13 @@ border-radius:24px;
 
 }
 
-.contador{
+canvas{
 
-margin-top:20px;
-
-font-size:14px;
-
-opacity:.8;
+display:none;
 
 }
 
 </style>
-
 </head>
 
 <body>
@@ -306,42 +265,30 @@ opacity:.8;
 <div class="container">
 
 <h1>
-
 Nos ajude a adoçar o mundo
-
 </h1>
 
 <div class="sub">
-
 Quando a Doce Presença chega o amargo do mundo vai embora ✨
-
 </div>
 
-<div
-class="card"
-id="cardMensagem">
+<div class="card">
 
 <div id="mensagem">
-
 Carregando...
-
 </div>
 
 <div id="autor"></div>
 
-<div
-class="likes"
-id="likes">
-
+<div class="likes" id="likes">
 ❤️ 0 curtidas
-
 </div>
 
 <div class="row">
 
 <button
 class="principal"
-onclick="event.stopPropagation();curtirMensagem()">
+onclick="curtirMensagem()">
 
 ❤️ Curtir
 
@@ -349,18 +296,24 @@ onclick="event.stopPropagation();curtirMensagem()">
 
 <button
 class="sec"
-onclick="event.stopPropagation();receberMensagem()">
+onclick="gerarImagemMensagemAtual()">
 
-🍯 Outra
+🖼️ Compartilhar
 
 </button>
 
 </div>
 
-</div>
-
 <button
 class="principal"
+onclick="receberMensagem()">
+
+🍯 Adoce seu dia
+
+</button>
+
+<button
+class="sec"
 onclick="abrirModal()">
 
 🤎 Adoce o dia de alguém
@@ -369,31 +322,19 @@ onclick="abrirModal()">
 
 <a
 class="btn instagram"
-href="https://www.instagram.com/doce.presenca.doces?igsh=MWVvcW44bmZ6bXZpdQ=="
-target="_blank">
+target="_blank"
+href="https://www.instagram.com/doce.presenca.doces?igsh=MWVvcW44bmZ6bXZpdQ==">
 
 ✨ Conhecer Instagram
 
 </a>
 
-<div class="contador">
-
-<span id="total">
-
-0
-
-</span>
-
-presenças espalhadas ✨
-
 </div>
 
 </div>
 
 
-<div
-class="modal"
-id="modal">
+<div class="modal" id="modal">
 
 <div class="box">
 
@@ -413,7 +354,15 @@ placeholder="Escreva sua presença"></textarea>
 class="principal"
 onclick="salvarMensagem()">
 
-Compartilhar
+Compartilhar no site
+
+</button>
+
+<button
+class="sec"
+onclick="compartilharWhats()">
+
+WhatsApp + Arte
 
 </button>
 
@@ -422,15 +371,27 @@ Compartilhar
 </div>
 
 
-<div
-class="modal"
-id="arteModal">
+<div class="modal" id="previewModal">
+
+<div>
 
 <img
-src="imagem.msg.png"
-class="imagemModal">
+id="previewImg"
+class="preview">
+
+<button
+class="principal"
+onclick="baixarImagem()">
+
+Salvar imagem
+
+</button>
 
 </div>
+
+</div>
+
+<canvas id="canvas"></canvas>
 
 <script type="module">
 
@@ -452,7 +413,6 @@ update
 from
 "https://www.gstatic.com/firebasejs/10.13.1/firebase-database.js";
 
-
 const firebaseConfig={
 
 apiKey:"AIzaSyAd1V6qcGeRmzRjNht8TScYJ5n1Z57Zjws",
@@ -471,28 +431,18 @@ initializeApp(firebaseConfig);
 const db=
 getDatabase(app);
 
-let atual={};
-let atualId=null;
-
 const modal=
 document.getElementById("modal");
 
-const arteModal=
-document.getElementById("arteModal");
+const previewModal=
+document.getElementById("previewModal");
 
-document
-.getElementById("cardMensagem")
-.onclick=()=>{
+const previewImg=
+document.getElementById("previewImg");
 
-arteModal.style.display="flex";
-
-};
-
-arteModal.onclick=()=>{
-
-arteModal.style.display="none";
-
-};
+let atual={};
+let atualId="";
+let imgGerada="";
 
 window.abrirModal=()=>{
 
@@ -502,11 +452,17 @@ modal.style.display="flex";
 
 modal.onclick=(e)=>{
 
-if(e.target===modal){
+if(e.target===modal)
 
 modal.style.display="none";
 
-}
+};
+
+previewModal.onclick=(e)=>{
+
+if(e.target===previewModal)
+
+previewModal.style.display="none";
 
 };
 
@@ -518,14 +474,7 @@ await get(
 ref(db,"presencas")
 );
 
-if(!snap.exists()){
-
-mensagem.innerHTML=
-"Seja a primeira presença 🍫";
-
-return;
-
-}
+if(!snap.exists()) return;
 
 const dados=
 snap.val();
@@ -536,9 +485,7 @@ Object.keys(dados);
 const key=
 keys[
 Math.floor(
-Math.random()
-*
-keys.length
+Math.random()*keys.length
 )
 ];
 
@@ -546,21 +493,15 @@ atualId=key;
 
 atual=dados[key];
 
-document
-.getElementById("mensagem")
-.innerHTML=
+document.getElementById("mensagem").innerHTML=
 
 `"${atual.texto}"`;
 
-document
-.getElementById("autor")
-.innerHTML=
+document.getElementById("autor").innerHTML=
 
-`✨ ${atual.nome || "Alguém"} ${atual.cidade ? "- "+atual.cidade : ""}`;
+`✨ ${atual.nome || "Alguém"} ${atual.cidade ? " • "+atual.cidade : ""}`;
 
-document
-.getElementById("likes")
-.innerHTML=
+document.getElementById("likes").innerHTML=
 
 `❤️ ${atual.likes || 0} curtidas`;
 
@@ -578,13 +519,7 @@ document.getElementById("cidade").value.trim();
 const texto=
 document.getElementById("texto").value.trim();
 
-if(!texto){
-
-alert("Escreva algo 🍫");
-
-return;
-
-}
+if(!texto) return;
 
 await push(
 
@@ -602,15 +537,9 @@ data:Date.now()
 
 );
 
-document.getElementById("nome").value="";
-document.getElementById("cidade").value="";
-document.getElementById("texto").value="";
-
 modal.style.display="none";
 
 receberMensagem();
-
-carregarTotal();
 
 };
 
@@ -637,45 +566,145 @@ likes:qtd
 
 atual.likes=qtd;
 
-document
-.getElementById("likes")
-.innerHTML=
+document.getElementById("likes").innerHTML=
 
 `❤️ ${qtd} curtidas`;
 
 };
 
-async function carregarTotal(){
+function gerarArte(texto,nome,cidade){
 
-const snap=
-await get(
-ref(db,"presencas")
+const canvas=
+document.getElementById("canvas");
+
+const ctx=
+canvas.getContext("2d");
+
+canvas.width=1080;
+canvas.height=1920;
+
+const fundo=
+new Image();
+
+fundo.src=
+"imagem.msg.png";
+
+fundo.onload=()=>{
+
+ctx.drawImage(
+fundo,
+0,
+0,
+1080,
+1920
 );
 
-document
-.getElementById("total")
-.innerText=
+ctx.fillStyle=
+"#4d2d1d";
 
-snap.exists()
+ctx.font=
+"58px serif";
 
-?
+ctx.fillText(
+texto,
+120,
+700
+);
 
-Object.keys(
-snap.val()
-).length
+ctx.font=
+"34px sans-serif";
 
-:
+ctx.fillText(
 
-0;
+`${nome || "Alguém"} ${cidade ? "• "+cidade : ""}`,
+
+150,
+
+1300
+
+);
+
+ctx.fillText(
+
+"@doce.presenca.doces",
+
+250,
+
+1500
+
+);
+
+imgGerada=
+canvas.toDataURL();
+
+previewImg.src=
+imgGerada;
+
+previewModal.style.display=
+"flex";
+
+};
 
 }
 
-receberMensagem();
+window.gerarImagemMensagemAtual=
+()=>{
 
-carregarTotal();
+gerarArte(
+
+atual.texto || "",
+
+atual.nome || "",
+
+atual.cidade || ""
+
+);
+
+};
+
+window.compartilharWhats=
+()=>{
+
+const nome=
+document.getElementById("nome").value;
+
+const cidade=
+document.getElementById("cidade").value;
+
+const texto=
+document.getElementById("texto").value;
+
+gerarArte(
+texto,
+nome,
+cidade
+);
+
+};
+
+window.baixarImagem=
+()=>{
+
+const a=
+document.createElement("a");
+
+a.href=
+imgGerada;
+
+a.download=
+"doce-presenca.png";
+
+a.click();
+
+window.open(
+"https://wa.me"
+);
+
+};
+
+receberMensagem();
 
 </script>
 
 </body>
-
 </html>
