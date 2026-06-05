@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+
 <title>Doce Presença</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,7 +27,7 @@ font-family:'Montserrat',sans-serif;
 background:
 linear-gradient(
 rgba(20,10,5,.55),
-rgba(20,10,5,.65)
+rgba(20,10,5,.70)
 ),
 url("imagem.png");
 
@@ -52,16 +54,19 @@ max-width:390px;
 
 padding:22px;
 
-border-radius:28px;
+border-radius:30px;
 
 background:
 rgba(255,255,255,.10);
 
-backdrop-filter:blur(12px);
+backdrop-filter:blur(14px);
 
 color:white;
 
 text-align:center;
+
+box-shadow:
+0 10px 30px rgba(0,0,0,.25);
 
 }
 
@@ -73,6 +78,8 @@ serif;
 
 font-size:44px;
 
+line-height:1;
+
 margin-bottom:12px;
 
 }
@@ -81,9 +88,11 @@ margin-bottom:12px;
 
 font-size:14px;
 
-line-height:1.6;
+line-height:1.7;
 
 margin-bottom:20px;
+
+opacity:.95;
 
 }
 
@@ -93,9 +102,12 @@ background:white;
 
 color:#5b3926;
 
-padding:25px;
+padding:26px;
 
-border-radius:24px;
+border-radius:28px;
+
+box-shadow:
+0 5px 20px rgba(0,0,0,.12);
 
 }
 
@@ -105,7 +117,7 @@ font-family:
 'Cormorant Garamond',
 serif;
 
-font-size:28px;
+font-size:30px;
 
 line-height:1.4;
 
@@ -113,7 +125,7 @@ line-height:1.4;
 
 #autor{
 
-margin-top:14px;
+margin-top:18px;
 
 font-size:14px;
 
@@ -144,15 +156,17 @@ button,
 
 width:100%;
 
-padding:14px;
+padding:15px;
+
+margin-top:12px;
 
 border:none;
 
-border-radius:16px;
+border-radius:18px;
 
 font-weight:600;
 
-margin-top:12px;
+font-size:15px;
 
 cursor:pointer;
 
@@ -162,11 +176,13 @@ cursor:pointer;
 
 background:#e6b46d;
 
+color:#4d2d1d;
+
 }
 
 .sec{
 
-background:#f3f3f3;
+background:#f4f4f4;
 
 }
 
@@ -206,15 +222,22 @@ z-index:999;
 
 width:100%;
 
-max-width:360px;
+max-width:340px;
+
+max-height:85vh;
+
+overflow-y:auto;
 
 background:#fff8f2;
 
-padding:24px;
+padding:22px;
 
-border-radius:24px;
+border-radius:26px;
 
 color:#5b3926;
+
+box-shadow:
+0 10px 30px rgba(0,0,0,.25);
 
 }
 
@@ -231,13 +254,17 @@ border-radius:12px;
 
 border:1px solid #ddd;
 
+font-size:16px;
+
 }
 
 textarea{
 
-height:120px;
+height:140px;
 
 resize:none;
+
+line-height:1.6;
 
 }
 
@@ -247,7 +274,7 @@ width:92%;
 
 max-width:360px;
 
-border-radius:24px;
+border-radius:26px;
 
 }
 
@@ -258,6 +285,7 @@ display:none;
 }
 
 </style>
+
 </head>
 
 <body>
@@ -275,12 +303,12 @@ Quando a Doce Presença chega o amargo do mundo vai embora ✨
 <div class="card">
 
 <div id="mensagem">
-Carregando...
+Carregando presença...
 </div>
 
 <div id="autor"></div>
 
-<div class="likes" id="likes">
+<div id="likes" class="likes">
 ❤️ 0 curtidas
 </div>
 
@@ -316,7 +344,7 @@ onclick="receberMensagem()">
 class="sec"
 onclick="abrirModal()">
 
-🤎 Adoce o dia de alguém
+🍫 Adoce o dia de alguém
 
 </button>
 
@@ -325,14 +353,13 @@ class="btn instagram"
 target="_blank"
 href="https://www.instagram.com/doce.presenca.doces?igsh=MWVvcW44bmZ6bXZpdQ==">
 
-✨ Conhecer Instagram
+📷 Conhecer nosso Instagram
 
 </a>
 
 </div>
 
 </div>
-
 
 <div class="modal" id="modal">
 
@@ -348,13 +375,13 @@ placeholder="Cidade opcional">
 
 <textarea
 id="texto"
-placeholder="Escreva sua presença"></textarea>
+placeholder="Escreva uma presença doce..."></textarea>
 
 <button
 class="principal"
 onclick="salvarMensagem()">
 
-Compartilhar no site
+Salvar no site
 
 </button>
 
@@ -370,7 +397,6 @@ WhatsApp + Arte
 
 </div>
 
-
 <div class="modal" id="previewModal">
 
 <div>
@@ -383,7 +409,7 @@ class="preview">
 class="principal"
 onclick="baixarImagem()">
 
-Salvar imagem
+Salvar / Compartilhar
 
 </button>
 
@@ -397,21 +423,15 @@ Salvar imagem
 
 import {
 initializeApp
-}
-from
-"https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
+} from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
 
 import {
-
 getDatabase,
 ref,
 push,
 get,
 update
-
-}
-from
-"https://www.gstatic.com/firebasejs/10.13.1/firebase-database.js";
+} from "https://www.gstatic.com/firebasejs/10.13.1/firebase-database.js";
 
 const firebaseConfig={
 
@@ -425,24 +445,17 @@ appId:"1:987943880698:web:a2fe43a2567de892a00643"
 
 };
 
-const app=
-initializeApp(firebaseConfig);
+const app=initializeApp(firebaseConfig);
 
-const db=
-getDatabase(app);
-
-const modal=
-document.getElementById("modal");
-
-const previewModal=
-document.getElementById("previewModal");
-
-const previewImg=
-document.getElementById("previewImg");
+const db=getDatabase(app);
 
 let atual={};
 let atualId="";
 let imgGerada="";
+
+const modal=document.getElementById("modal");
+const previewModal=document.getElementById("previewModal");
+const previewImg=document.getElementById("previewImg");
 
 window.abrirModal=()=>{
 
@@ -452,22 +465,25 @@ modal.style.display="flex";
 
 modal.onclick=(e)=>{
 
-if(e.target===modal)
+if(e.target===modal){
 
 modal.style.display="none";
+
+}
 
 };
 
 previewModal.onclick=(e)=>{
 
-if(e.target===previewModal)
+if(e.target===previewModal){
 
 previewModal.style.display="none";
 
+}
+
 };
 
-window.receberMensagem=
-async()=>{
+window.receberMensagem=async()=>{
 
 const snap=
 await get(
@@ -476,8 +492,7 @@ ref(db,"presencas")
 
 if(!snap.exists()) return;
 
-const dados=
-snap.val();
+const dados=snap.val();
 
 const keys=
 Object.keys(dados);
@@ -507,17 +522,13 @@ document.getElementById("likes").innerHTML=
 
 };
 
-window.salvarMensagem=
-async()=>{
+window.salvarMensagem=async()=>{
 
-const nome=
-document.getElementById("nome").value.trim();
+const nome=document.getElementById("nome").value.trim();
 
-const cidade=
-document.getElementById("cidade").value.trim();
+const cidade=document.getElementById("cidade").value.trim();
 
-const texto=
-document.getElementById("texto").value.trim();
+const texto=document.getElementById("texto").value.trim();
 
 if(!texto) return;
 
@@ -526,13 +537,11 @@ await push(
 ref(db,"presencas"),
 
 {
-
 nome,
 cidade,
 texto,
 likes:0,
 data:Date.now()
-
 }
 
 );
@@ -543,13 +552,11 @@ receberMensagem();
 
 };
 
-window.curtirMensagem=
-async()=>{
+window.curtirMensagem=async()=>{
 
 if(!atualId) return;
 
-const qtd=
-(atual.likes||0)+1;
+const qtd=(atual.likes||0)+1;
 
 await update(
 
@@ -558,9 +565,7 @@ db,
 "presencas/"+atualId
 ),
 
-{
-likes:qtd
-}
+{likes:qtd}
 
 );
 
@@ -572,22 +577,59 @@ document.getElementById("likes").innerHTML=
 
 };
 
+function wrapText(
+ctx,
+text,
+x,
+y,
+maxWidth,
+lineHeight
+){
+
+const words=text.split(" ");
+
+let line="";
+
+for(let n=0;n<words.length;n++){
+
+const test=line+words[n]+" ";
+
+if(
+
+ctx.measureText(test).width>maxWidth
+
+){
+
+ctx.fillText(line,x,y);
+
+line=words[n]+" ";
+
+y+=lineHeight;
+
+}else{
+
+line=test;
+
+}
+
+}
+
+ctx.fillText(line,x,y);
+
+}
+
 function gerarArte(texto,nome,cidade){
 
-const canvas=
-document.getElementById("canvas");
+const canvas=document.getElementById("canvas");
 
-const ctx=
-canvas.getContext("2d");
+const ctx=canvas.getContext("2d");
 
 canvas.width=1080;
 canvas.height=1920;
 
-const fundo=
-new Image();
+const fundo=new Image();
 
-fundo.src=
-"imagem.msg.png";
+fundo.src="imagem.msg.png";
 
 fundo.onload=()=>{
 
@@ -599,38 +641,51 @@ fundo,
 1920
 );
 
-ctx.fillStyle=
-"#4d2d1d";
+ctx.fillStyle="#4b2b1f";
 
-ctx.font=
-"58px serif";
+ctx.textAlign="center";
 
-ctx.fillText(
+ctx.font="bold 74px serif";
+
+wrapText(
+ctx,
 texto,
-120,
-700
+540,
+700,
+700,
+95
 );
 
-ctx.font=
-"34px sans-serif";
+ctx.font="42px sans-serif";
 
 ctx.fillText(
 
 `${nome || "Alguém"} ${cidade ? "• "+cidade : ""}`,
 
-150,
-
-1300
+540,
+1320
 
 );
+
+ctx.font="48px sans-serif";
 
 ctx.fillText(
 
 "@doce.presenca.doces",
 
-250,
+540,
+1520
 
-1500
+);
+
+ctx.font="34px sans-serif";
+
+ctx.fillText(
+
+"espalhando presença 🍫",
+
+540,
+1600
 
 );
 
