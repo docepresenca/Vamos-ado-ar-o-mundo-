@@ -1,41 +1,65 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1">
 
 <title>Doce Presença</title>
+
+<link rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;600&display=swap"
+rel="stylesheet">
 
 <style>
 
 *{
+
 margin:0;
 padding:0;
 box-sizing:border-box;
+
 }
 
 body{
 
-font-family:Arial,sans-serif;
-
-background:
-linear-gradient(
-180deg,
-#4b2c20,
-#70452d,
-#a9744c
-);
+font-family:
+'Montserrat',
+sans-serif;
 
 min-height:100vh;
 
-padding:20px;
+background-image:
+
+linear-gradient(
+rgba(40,20,10,.45),
+rgba(40,20,10,.55)
+),
+
+url("imagem.png");
+
+background-size:cover;
+
+background-position:center;
+
+background-repeat:no-repeat;
 
 display:flex;
 
 justify-content:center;
 
 align-items:center;
+
+padding:20px;
 
 color:white;
 
@@ -50,48 +74,74 @@ max-width:430px;
 background:
 rgba(255,255,255,.10);
 
-backdrop-filter:blur(12px);
+backdrop-filter:blur(14px);
 
-padding:25px;
+padding:32px 24px;
 
-border-radius:28px;
+border-radius:32px;
+
+box-shadow:
+
+0 15px 40px rgba(0,0,0,.35);
 
 text-align:center;
 
-box-shadow:
-0 8px 30px rgba(0,0,0,.35);
+}
+
+.logo{
+
+font-size:18px;
+
+letter-spacing:3px;
+
+opacity:.8;
+
+margin-bottom:10px;
 
 }
 
 h1{
 
-font-size:34px;
+font-family:
+'Cormorant Garamond',
+serif;
 
-margin-bottom:12px;
+font-size:52px;
+
+font-weight:600;
+
+line-height:1;
+
+margin-bottom:15px;
 
 }
 
 .sub{
 
+line-height:1.7;
+
+font-size:15px;
+
 opacity:.9;
 
-margin-bottom:25px;
-
-line-height:1.5;
+margin-bottom:28px;
 
 }
 
 .card{
 
-background:white;
+background-image:
+url("imagem.msg.png");
 
-color:#5d3926;
+background-size:cover;
 
-border-radius:22px;
+background-position:center;
 
-padding:25px;
+min-height:290px;
 
-min-height:220px;
+border-radius:26px;
+
+padding:35px;
 
 display:flex;
 
@@ -101,23 +151,34 @@ justify-content:center;
 
 align-items:center;
 
-line-height:1.6;
+box-shadow:
+0 10px 35px rgba(0,0,0,.2);
+
+margin-bottom:18px;
 
 }
 
 #mensagem{
 
-font-size:20px;
+font-family:
+'Cormorant Garamond',
+serif;
+
+font-size:29px;
+
+line-height:1.4;
+
+color:#4c2e1f;
 
 }
 
 .likes{
 
-margin-top:18px;
+margin-top:20px;
 
-font-size:15px;
+font-size:14px;
 
-opacity:.8;
+color:#5a3929;
 
 }
 
@@ -133,28 +194,22 @@ width:100%;
 
 }
 
-.row button{
-
-flex:1;
-
-}
-
 button,
 .btn{
 
 width:100%;
 
-padding:15px;
+border:none;
+
+padding:16px;
 
 margin-top:12px;
 
-border:none;
+border-radius:18px;
 
-border-radius:15px;
+font-weight:600;
 
-font-size:16px;
-
-font-weight:bold;
+font-size:15px;
 
 cursor:pointer;
 
@@ -162,15 +217,15 @@ cursor:pointer;
 
 .principal{
 
-background:#ffca7a;
+background:#e7b56f;
+
+color:#4a2d1e;
 
 }
 
 .sec{
 
-background:white;
-
-color:#5c3a2d;
+background:rgba(255,255,255,.92);
 
 }
 
@@ -180,9 +235,17 @@ display:block;
 
 text-decoration:none;
 
-background:#8a5737;
+background:#7d4f34;
 
 color:white;
+
+}
+
+.contador{
+
+margin-top:20px;
+
+opacity:.8;
 
 }
 
@@ -194,7 +257,7 @@ position:fixed;
 
 inset:0;
 
-background:rgba(0,0,0,.6);
+background:rgba(0,0,0,.75);
 
 justify-content:center;
 
@@ -202,21 +265,23 @@ align-items:center;
 
 padding:20px;
 
+z-index:999;
+
 }
 
 .box{
 
-background:white;
-
 width:100%;
 
-max-width:360px;
+max-width:380px;
+
+background:#fff7f1;
+
+color:#4d2d1d;
 
 padding:25px;
 
-border-radius:20px;
-
-color:#5c3a2d;
+border-radius:26px;
 
 }
 
@@ -225,11 +290,11 @@ textarea{
 
 width:100%;
 
-padding:12px;
+padding:14px;
 
-margin-top:10px;
+margin-top:12px;
 
-border-radius:12px;
+border-radius:14px;
 
 border:1px solid #ddd;
 
@@ -243,17 +308,19 @@ resize:none;
 
 }
 
-.contador{
+.preview{
 
-margin-top:20px;
-
-opacity:.8;
+display:none;
 
 }
 
-canvas{
+.preview img{
 
-display:none;
+width:100%;
+
+border-radius:20px;
+
+margin-top:20px;
 
 }
 
@@ -265,9 +332,15 @@ display:none;
 
 <div class="container">
 
+<div class="logo">
+
+DOCE PRESENÇA
+
+</div>
+
 <h1>
 
-🍫 Nos ajude a adoçar o mundo
+Nos ajude a adoçar o mundo
 
 </h1>
 
@@ -354,6 +427,7 @@ presenças espalhadas ✨
 
 </div>
 
+<!-- modal mensagem -->
 
 <div
 class="modal"
@@ -395,131 +469,49 @@ WhatsApp
 
 </div>
 
-<canvas id="canvas"></canvas>
+<!-- modal preview -->
 
-<script type="module">
+<div
+class="modal"
+id="previewModal">
 
-import {
-initializeApp
-}
-from
-"https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
+<div class="box preview">
 
-import {
+<img id="previewImg">
 
-getDatabase,
-ref,
-push,
-get,
-update
+<button
+class="principal"
+onclick="baixarImagem()">
 
-}
-from
-"https://www.gstatic.com/firebasejs/10.13.1/firebase-database.js";
+Salvar imagem
 
+</button>
 
-const firebaseConfig={
+</div>
 
-apiKey:"AIzaSyAd1V6qcGeRmzRjNht8TScYJ5n1Z57Zjws",
-authDomain:"mundo-mais-doce.firebaseapp.com",
-databaseURL:"https://mundo-mais-doce-default-rtdb.firebaseio.com/",
-projectId:"mundo-mais-doce",
-storageBucket:"mundo-mais-doce.firebasestorage.app",
-messagingSenderId:"987943880698",
-appId:"1:987943880698:web:a2fe43a2567de892a00643"
+</div>
 
-};
+<script>
 
-const app=initializeApp(firebaseConfig);
+/* usa seu JS firebase atual */
 
-const db=getDatabase(app);
+/* alterar somente gerarImagem */
 
-let atualId=null;
-let atual={};
+let imgGerada="";
 
-window.receberMensagem=async()=>{
+function gerarImagem(){
 
-const snap=
-await get(
-ref(db,"presencas")
-);
+const canvas=
+document.createElement("canvas");
 
-if(!snap.exists()) return;
+canvas.width=1080;
 
-const obj=snap.val();
-
-const keys=
-Object.keys(obj);
-
-const key=
-keys[
-Math.floor(
-Math.random()*keys.length
-)
-];
-
-atualId=key;
-
-atual=obj[key];
-
-mensagem.innerHTML=
-
-`"${atual.texto}"
-
-<br><br>
-
-✨ ${atual.nome || "Alguém"}`;
-
-likes.innerText=
-
-`❤️ ${atual.likes || 0} curtidas`;
-
-};
-
-window.curtirMensagem=
-async()=>{
-
-if(!atualId) return;
-
-const qtd=
-(atual.likes || 0)+1;
-
-await update(
-
-ref(
-db,
-"presencas/"+atualId
-),
-
-{
-likes:qtd
-}
-
-);
-
-atual.likes=qtd;
-
-likes.innerText=
-
-`❤️ ${qtd} curtidas`;
-
-};
-
-window.gerarImagem=()=>{
-
-const c=
-document.getElementById(
-"canvas"
-);
+canvas.height=1920;
 
 const ctx=
-c.getContext("2d");
+canvas.getContext("2d");
 
-c.width=1080;
-
-c.height=1920;
-
-ctx.fillStyle="#6a4027";
+ctx.fillStyle="#6d432b";
 
 ctx.fillRect(
 0,
@@ -528,232 +520,81 @@ ctx.fillRect(
 1920
 );
 
-ctx.fillStyle="#fff5eb";
+ctx.fillStyle="#fff6ef";
 
 ctx.fillRect(
-80,
-350,
-920,
-900
+90,
+320,
+900,
+1000
 );
 
-ctx.fillStyle="#5c3a2d";
+ctx.fillStyle="#4f3122";
 
-ctx.font="55px Arial";
+ctx.font="60px serif";
 
-wrap(
+ctx.fillText(
 
-ctx,
+document.getElementById(
+"mensagem"
+).innerText,
 
-atual.texto || "",
+130,
 
-150,
-
-550,
-
-780,
-
-75
+600
 
 );
 
-ctx.font="42px Arial";
+ctx.font="42px serif";
 
 ctx.fillText(
 
 "@doce.presenca.doces",
 
-220,
+250,
 
-1100
+1200
 
 );
 
-const link=
-document.createElement("a");
+imgGerada=
+canvas.toDataURL();
 
-link.download=
-"presenca.png";
+previewImg.src=
+imgGerada;
 
-link.href=
-c.toDataURL();
-
-link.click();
-
-};
-
-function wrap(
-ctx,
-text,
-x,
-y,
-max,
-line
-){
-
-let words=
-text.split(" ");
-
-let str="";
-
-for(let n=0;n<words.length;n++){
-
-let test=
-str+
-words[n]+" ";
-
-let width=
-ctx.measureText(
-test
-).width;
-
-if(width>max){
-
-ctx.fillText(
-str,
-x,
-y
-);
-
-str=
-words[n]+" ";
-
-y+=line;
-
-}
-
-else{
-
-str=test;
-
-}
-
-}
-
-ctx.fillText(
-str,
-x,
-y
-);
-
-}
-
-window.abrirModal=
-()=>{
-
-modal.style.display=
+previewModal.style.display=
 "flex";
 
-};
+}
 
-modal.onclick=
+function baixarImagem(){
+
+const a=
+document.createElement("a");
+
+a.href=
+imgGerada;
+
+a.download=
+"presenca.png";
+
+a.click();
+
+}
+
+previewModal.onclick=
 (e)=>{
 
-if(e.target===modal)
+if(e.target===previewModal)
 
-modal.style.display=
+previewModal.style.display=
 "none";
 
 };
-
-window.salvarMensagem=
-async()=>{
-
-const nome=
-document.getElementById(
-"nome"
-).value;
-
-const cidade=
-document.getElementById(
-"cidade"
-).value;
-
-const texto=
-document.getElementById(
-"texto"
-).value;
-
-if(!texto) return;
-
-await push(
-
-ref(
-db,
-"presencas"
-),
-
-{
-
-nome,
-cidade,
-texto,
-likes:0,
-data:Date.now()
-
-}
-
-);
-
-modal.style.display=
-"none";
-
-carregarTotal();
-
-};
-
-window.compartilharWhats=
-()=>{
-
-const txt=
-document.getElementById(
-"texto"
-).value;
-
-window.open(
-
-"https://wa.me/?text="+
-
-encodeURIComponent(
-
-txt+
-
-"\n\n🍫 Doce Presença"
-
-)
-
-);
-
-};
-
-async function carregarTotal(){
-
-const snap=
-await get(
-ref(db,"presencas")
-);
-
-if(!snap.exists()){
-
-total.innerText=0;
-
-return;
-
-}
-
-total.innerText=
-
-Object.keys(
-snap.val()
-).length;
-
-}
-
-receberMensagem();
-
-carregarTotal();
 
 </script>
 
 </body>
+
 </html>
