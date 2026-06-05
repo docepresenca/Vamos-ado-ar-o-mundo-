@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Espalhe Presença</title>
+
+<style>
+
+*{
+box-sizing:border-box;
+}
+
+body{
+
+margin:0;
+
+font-family:Arial,sans-serif;
+
+background:
+linear-gradient(
+180deg,
+#4b2c20,
+#7b4b32
+);
+
+color:white;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+min-height:100vh;
+
+padding:20px;
+
+}
+
+.container{
+
+width:100%;
+
+max-width:420px;
+
+background:
+rgba(255,255,255,.10);
+
+backdrop-filter:blur(10px);
+
+padding:25px;
+
+border-radius:25px;
+
+text-align:center;
+
+box-shadow:
+0 0 25px rgba(0,0,0,.30);
+
+}
+
+h1{
+
+font-size:32px;
+
+margin-bottom:10px;
+
+}
+
+.sub{
+
+opacity:.9;
+
+margin-bottom:25px;
+
+line-height:1.5;
+
+}
+
+.card{
+
+background:white;
+
+color:#5c3a2d;
+
+padding:20px;
+
+border-radius:20px;
+
+margin:20px 0;
+
+min-height:130px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+font-size:18px;
+
+line-height:1.5;
+
+}
+
+button{
+
+width:100%;
+
+padding:15px;
+
+margin-top:12px;
+
+border:none;
+
+border-radius:15px;
+
+font-size:18px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+background:#ffca7a;
+
+}
+
+input,
+textarea{
+
+width:100%;
+
+padding:12px;
+
+margin-top:12px;
+
+border:none;
+
+border-radius:12px;
+
+font-size:16px;
+
+}
+
+textarea{
+
+height:120px;
+
+resize:none;
+
+}
+
+.contador{
+
+margin-top:20px;
+
+opacity:.85;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>
+
+🍫 Nos ajude a adoçar o mundo
+
+</h1>
+
+<div class="sub">
+
+Cada mensagem pode encontrar alguém exatamente quando ela precisar ✨
+
+</div>
+
+<div
+class="card"
+id="mensagem">
+
+Clique abaixo para receber uma presença ❤️
+
+</div>
+
+<button onclick="receberMensagem()">
+
+Receber uma Presença
+
+</button>
+
+<input
+id="nome"
+placeholder="Seu nome (opcional)">
+
+<textarea
+id="texto"
+placeholder="Deixe uma presença para alguém...">
+</textarea>
+
+<button onclick="salvarMensagem()">
+
+Espalhar Presença 🍫
+
+</button>
+
+<div class="contador">
+
+<span id="total">
+
+0
+
+</span>
+
+presenças espalhadas ✨
+
+</div>
+
+</div>
+
+<script type="module">
+
+import {
+
+initializeApp
+
+}
+
+from
+"https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
+
+import {
+
+getDatabase,
+ref,
+push,
+get
+
+}
+
+from
+"https://www.gstatic.com/firebasejs/10.13.1/firebase-database.js";
+
+
+const firebaseConfig = {
+
+apiKey:
+"AIzaSyAd1V6qcGeRmzRjNht8TScYJ5n1Z57Zjws",
+
+authDomain:
+"mundo-mais-doce.firebaseapp.com",
+
+databaseURL:
+"https://mundo-mais-doce-default-rtdb.firebaseio.com/",
+
+projectId:
+"mundo-mais-doce",
+
+storageBucket:
+"mundo-mais-doce.firebasestorage.app",
+
+messagingSenderId:
+"987943880698",
+
+appId:
+"1:987943880698:web:a2fe43a2567de892a00643",
+
+measurementId:
+"G-YTBG03LS0W"
+
+};
+
+
+const app =
+initializeApp(firebaseConfig);
+
+const db =
+getDatabase(app);
+
+
+async function receberMensagem(){
+
+const snapshot =
+await get(
+ref(
+db,
+"presencas"
+)
+);
+
+if(!snapshot.exists()){
+
+document.getElementById(
+"mensagem"
+).innerHTML =
+
+"Seja a primeira presença 🍫";
+
+return;
+
+}
+
+const mensagens =
+
+Object.values(
+snapshot.val()
+);
+
+const sorteada =
+
+mensagens[
+Math.floor(
+Math.random()
+*
+mensagens.length
+)
+];
+
+document.getElementById(
+"mensagem"
+).innerHTML =
+
+`"${sorteada.texto}"
+
+<br><br>
+
+✨ ${
+sorteada.nome ||
+"Alguém"
+}`;
+
+}
+
+
+window.receberMensagem =
+receberMensagem;
+
+
+async function salvarMensagem(){
+
+const nome =
+
+document.getElementById(
+"nome"
+).value.trim();
+
+const texto =
+
+document.getElementById(
+"texto"
+).value.trim();
+
+if(!texto){
+
+alert(
+"Escreva uma mensagem 😄"
+);
+
+return;
+
+}
+
+await push(
+
+ref(
+db,
+"presencas"
+),
+
+{
+
+nome,
+texto,
+
+data:
+Date.now()
+
+}
+
+);
+
+document.getElementById(
+"nome"
+).value = "";
+
+document.getElementById(
+"texto"
+).value = "";
+
+alert(
+"Presença espalhada 🍫"
+
+);
+
+carregarTotal();
+
+}
+
+
+window.salvarMensagem =
+salvarMensagem;
+
+
+async function carregarTotal(){
+
+const snap =
+
+await get(
+ref(
+db,
+"presencas"
+)
+);
+
+if(!snap.exists()){
+
+document.getElementById(
+"total"
+).innerText = 0;
+
+return;
+
+}
+
+document.getElementById(
+"total"
+).innerText =
+
+Object.keys(
+snap.val()
+).length;
+
+}
+
+
+carregarTotal();
+
+</script>
+
+</body>
+
+</html>
